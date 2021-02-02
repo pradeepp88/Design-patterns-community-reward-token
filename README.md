@@ -1,2 +1,2 @@
-# Design-patterns-community-reward-token
-Blockchain design patterns-community reward token
+# Community Reward Token
+Assignment for Blockchain Design Patterns class
