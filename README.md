@@ -1,5 +1,5 @@
 # Community Reward Token
-Assignment for Blockchain Design Patterns class
+Assignment for Blockchain Design Patterns class.
 
 # Authors
 Elanie Quiambao

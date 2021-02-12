@@ -1,0 +1,11 @@
+{
+    "name": "community-reward-token-contract",
+    "version": "1.0.0",
+    "description": "Community Reward Token Contract",
+    "devDependencies": {
+        "truffle": "^5.1.66"
+    },
+    "dependencies": {
+        "@openzeppelin/contracts": "^3.4.0"
+    }
+}
