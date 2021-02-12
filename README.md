@@ -1,2 +1,13 @@
-# Design-patterns-community-reward-token
-Blockchain design patterns-community reward token
+# Community Reward Token
+Assignment for Blockchain Design Patterns class.
+
+# Authors
+Elanie Quiambao
+
+Littbarski Adeh
+
+Nidusha Hewawilladdara
+
+Pradeep Kumar Prakasam
+
+Saiju Mathew Stephen
