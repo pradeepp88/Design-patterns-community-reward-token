@@ -1,0 +1,13 @@
+.login {
+    display: flex;
+    flex-direction: column;
+    margin: 200px auto;
+    padding: 20px;
+    width: 300px;
+    border: 3px solid #020b35;
+    border-radius: 20px;
+    background: #ffffff;
+  }
+  
+.login input{display:block;padding:5px;font-family:tahoma;font-size:13px;margin:20px auto;outline:none;border:1px solid #000000;width:200px;}
+.login input[type="submit"]{border-left:10px solid #000000;cursor:pointer;}

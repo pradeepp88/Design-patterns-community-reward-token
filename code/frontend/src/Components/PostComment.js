@@ -1,16 +1,15 @@
 import React from "react";
-// import Comment from "./Comment";
+import { withRouter } from "react-router-dom";
+
+import Comment from "./Comment";
 import { TextField, Button } from "@material-ui/core";
 import SendRoundedIcon from "@material-ui/icons/SendRounded";
-import AnswerCard from "./AnswerCard";
 
-class Answer extends React.Component {
+class PostComment extends React.Component {
   constructor(props) {
     super(props);
 
-    // register username
     this.state = {
-      username: "",
       comment: "",
       commentsList: [],
       id: 1,
@@ -26,11 +25,15 @@ class Answer extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    console.log("Logged in user >>>", this.props.location.state.user);
+
     if (this.state.comment === "" || this.state.comment == null) {
       return;
     }
-    var newComment = this.state.comment;
-    var newComments = this.state.commentsList;
+    var newComment = (
+      <Comment key={this.state.id} comment={this.state.comment} />
+    );
+    var newComments = this.state.commentsList.slice();
 
     newComments.push(newComment);
     this.setState({
@@ -38,14 +41,10 @@ class Answer extends React.Component {
       commentsList: newComments,
       id: this.state.id + 1,
     });
+
+    // save question
+    // http://localhost:8000/qa/question?username=1&question=text&cost=123
   }
-  //   handle submit on when user presses enter
-  inputKeyDown = (event) => {
-    const val = event.target.value;
-    if (event.key === "Enter" && val) {
-      this.handleSubmit(event);
-    }
-  };
 
   render() {
     const divStyle = {
@@ -54,6 +53,7 @@ class Answer extends React.Component {
       margin: ".5rem",
       justifyCntent: "center",
       alignItems: "center",
+      width: "50%",
     };
 
     const formStyle = {
@@ -62,21 +62,24 @@ class Answer extends React.Component {
       margin: ".5rem",
       justifyCntent: "center",
       alignItems: "center",
+      width: "100%",
     };
 
     return (
       <div style={divStyle}>
         <h1>{this.props.status}</h1>
+        LoggedIn: {this.props.location.state.user.username}
         <form style={formStyle}>
           <TextField
             id="outlined-basic"
-            label="Answer"
+            label="Your question"
             variant="outlined"
             autoFocus
             onChange={(e) => this.handleChange(e)}
-            onKeyDown={(e) => this.inputKeyDown(e)}
             value={this.state.comment}
             multiline
+            rows={3}
+            fullWidth
           />
 
           <hr />
@@ -87,18 +90,13 @@ class Answer extends React.Component {
             startIcon={<SendRoundedIcon />}
             onClick={(e) => this.handleSubmit(e)}
           >
-            Answer
+            Post
           </Button>
         </form>
-
-        {this.state.commentsList.map((comment, index) => (
-          <div key={index}>
-            <AnswerCard data={comment} />
-          </div>
-        ))}
+        {this.state.commentsList}
       </div>
     );
   }
 }
 
-export default Answer;
+export default withRouter(PostComment);
