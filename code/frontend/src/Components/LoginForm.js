@@ -28,17 +28,16 @@ const LoginForm = () => {
 
   // Register User
   const registerUser = async () => {
-    const response = await fetch("http://localhost:8000/users", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: username,
-        address: address,
-      }),
-    });
+    const response = await fetch(
+      `http://localhost:8000/users?username=${username}&address=${address}&isLoggedIn=true`,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      }
+    );
     const user = await response.json();
     alert(
       `You are now registered ${user.username}. Start asking/answering questions!`
