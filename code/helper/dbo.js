@@ -50,7 +50,7 @@ class DBO {
       console.log(`Error occurred in adding user to DB():${err}`)
     }
   }
-
+  //added
   loginUser = async (username) => {
     const User = await ModelUsers.findOneAndUpdate(
       { UserName: username },

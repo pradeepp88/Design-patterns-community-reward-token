@@ -11,23 +11,29 @@ router.get('/', async function (req, res, next) {
   console.log('Login:')
   console.log(req.query)
 
-  // changed findUser to loginUsers
-  const User = await dbo.loginUser(req.query.username)
+  let User = await dbo.findUser(req.query.username)
   console.log('User Query Complete')
-
-  //res.send(User != null && User.PublicAddress == req.query.address)
-  if (
-    User != null &&
-    User.PublicAddress == req.query.address &&
-    User.isLoggedIn
-  ) {
+  if (User.isLoggedIn) {
     res.json({
-      exist: true,
+      isLoggedIn: User.isLoggedIn,
       username: User.UserName,
       address: User.PublicAddress,
     })
   } else {
-    res.json({ exist: false })
+    User = await dbo.loginUser(req.query.username)
+    if (
+      User != null &&
+      User.PublicAddress == req.query.address &&
+      User.isLoggedIn
+    ) {
+      res.json({
+        exist: true,
+        username: User.UserName,
+        address: User.PublicAddress,
+      })
+    } else {
+      res.json({ exist: false })
+    }
   }
 })
 

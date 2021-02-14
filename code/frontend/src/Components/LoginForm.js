@@ -47,8 +47,8 @@ const LoginForm = () => {
     //loginUser()
 
     // clear username and address fields
-    // setUsername('')
-    // setAddress('')
+    setUsername('')
+    setAddress('')
   }
 
   //Login User
@@ -61,12 +61,16 @@ const LoginForm = () => {
     // clear username and address fields
     setUsername('')
     setAddress('')
-    if (user.exist) {
-      alert(
-        `You are now logged in ${user.username}. Start asking/answering questions!`,
-      )
+    if (user.isLoggedIn) {
+      alert(`You are already logged in ${user.username}.`)
     } else {
-      alert(`Oh no! You are not a registered user. Please register first.`)
+      if (user.exist) {
+        alert(
+          `You are now logged in ${user.username}. Start asking/answering questions!`,
+        )
+      } else {
+        alert(`Oh no! You are not a registered user. Please register first.`)
+      }
     }
   }
 
