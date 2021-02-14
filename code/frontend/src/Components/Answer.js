@@ -1,15 +1,16 @@
 import React from "react";
-import Comment from "./Comment";
+// import Comment from "./Comment";
 import { TextField, Button } from "@material-ui/core";
 import SendRoundedIcon from "@material-ui/icons/SendRounded";
 import AnswerCard from "./AnswerCard";
+
+const index = 0;
 
 class Answer extends React.Component {
   constructor(props) {
     super(props);
 
     // register username
-
     this.state = {
       username: "",
       comment: "",
@@ -31,7 +32,6 @@ class Answer extends React.Component {
       return;
     }
     var newComment = this.state.comment;
-
     var newComments = this.state.commentsList;
 
     newComments.push(newComment);
@@ -41,7 +41,6 @@ class Answer extends React.Component {
       id: this.state.id + 1,
     });
   }
-
   //   handle submit on when user presses enter
   inputKeyDown = (event) => {
     const val = event.target.value;
@@ -80,7 +79,6 @@ class Answer extends React.Component {
             onKeyDown={(e) => this.inputKeyDown(e)}
             value={this.state.comment}
             multiline
-            rows={10}
           />
 
           <hr />
@@ -96,7 +94,9 @@ class Answer extends React.Component {
         </form>
 
         {this.state.commentsList.map((comment) => (
-          <AnswerCard data={comment} />
+          <div key={index + 1}>
+            <AnswerCard data={comment} />
+          </div>
         ))}
       </div>
     );
