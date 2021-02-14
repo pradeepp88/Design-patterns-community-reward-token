@@ -38,6 +38,7 @@ class DBO {
         UserName: newuser.username,
         PublicAddress: newuser.address,
         TokenBalance: 50,
+        isLoggedIn: true,
       })
 
       const user = await newUser.save()
@@ -48,6 +49,16 @@ class DBO {
     } catch (err) {
       console.log(`Error occurred in adding user to DB():${err}`)
     }
+  }
+
+  loginUser = async (username) => {
+    const User = await ModelUsers.findOneAndUpdate(
+      { UserName: username },
+      { isLoggedIn: true },
+      { new: true },
+    )
+    console.log(User)
+    return User
   }
 
   findAllUsers = async () => {

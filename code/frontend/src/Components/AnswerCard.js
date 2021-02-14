@@ -7,6 +7,7 @@ import "./Card.css";
 const AnswerCard = (props) => {
   return (
     <div>
+      {/* add username here */}
       <Timer />
       <div className="card">
         {props.data}

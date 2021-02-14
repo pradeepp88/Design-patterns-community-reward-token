@@ -3,7 +3,7 @@ import Comment from "./Comment";
 import { TextField, Button } from "@material-ui/core";
 import SendRoundedIcon from "@material-ui/icons/SendRounded";
 
-class TweetContainer extends React.Component {
+class PostComment extends React.Component {
   constructor(props) {
     super(props);
 
@@ -39,14 +39,6 @@ class TweetContainer extends React.Component {
     });
   }
 
-  //   handle submit on when user presses enter
-  inputKeyDown = (event) => {
-    const val = event.target.value;
-    if (event.key === "Enter" && val) {
-      this.handleSubmit(event);
-    }
-  };
-
   render() {
     const divStyle = {
       display: "flex",
@@ -54,6 +46,7 @@ class TweetContainer extends React.Component {
       margin: ".5rem",
       justifyCntent: "center",
       alignItems: "center",
+      width: "50%",
     };
 
     const formStyle = {
@@ -62,6 +55,7 @@ class TweetContainer extends React.Component {
       margin: ".5rem",
       justifyCntent: "center",
       alignItems: "center",
+      width: "100%",
     };
 
     return (
@@ -74,10 +68,10 @@ class TweetContainer extends React.Component {
             variant="outlined"
             autoFocus
             onChange={(e) => this.handleChange(e)}
-            onKeyDown={(e) => this.inputKeyDown(e)}
             value={this.state.comment}
             multiline
-            rows={10}
+            rows={3}
+            fullWidth
           />
 
           <hr />
@@ -98,4 +92,4 @@ class TweetContainer extends React.Component {
   }
 }
 
-export default TweetContainer;
+export default PostComment;
