@@ -6,15 +6,15 @@ import "./Card.css";
 
 const AnswerCard = (props) => {
   return (
-    <>
+    <div>
+      <Timer />
       <div className="card">
-        <Timer />
         {props.data}
         <LikeButton data={props.data} />
         <DislikeButton />
         <button>Select</button>
       </div>
-    </>
+    </div>
   );
 };
 

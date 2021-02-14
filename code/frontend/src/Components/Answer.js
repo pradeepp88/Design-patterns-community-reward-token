@@ -4,8 +4,6 @@ import { TextField, Button } from "@material-ui/core";
 import SendRoundedIcon from "@material-ui/icons/SendRounded";
 import AnswerCard from "./AnswerCard";
 
-const index = 0;
-
 class Answer extends React.Component {
   constructor(props) {
     super(props);
@@ -93,8 +91,8 @@ class Answer extends React.Component {
           </Button>
         </form>
 
-        {this.state.commentsList.map((comment) => (
-          <div key={index + 1}>
+        {this.state.commentsList.map((comment, index) => (
+          <div key={index}>
             <AnswerCard data={comment} />
           </div>
         ))}
