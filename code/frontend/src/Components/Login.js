@@ -28,7 +28,7 @@ const LoginForm = () => {
 
   // Register User
   const registerUser = async () => {
-    const response = await fetch(`http://localhost:8000/users`, {
+    const response = await fetch('http://localhost:8000/users', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -47,8 +47,8 @@ const LoginForm = () => {
     //loginUser()
 
     // clear username and address fields
-    setUsername('')
-    setAddress('')
+    // setUsername('')
+    // setAddress('')
   }
 
   //Login User
@@ -61,16 +61,12 @@ const LoginForm = () => {
     // clear username and address fields
     setUsername('')
     setAddress('')
-    if (user.isLoggedIn) {
-      alert(`You are already logged in ${user.username}.`)
+    if (user.exist) {
+      alert(
+        `You are now logged in ${user.username}. Start asking/answering questions!`,
+      )
     } else {
-      if (user.exist) {
-        alert(
-          `You are now logged in ${user.username}. Start asking/answering questions!`,
-        )
-      } else {
-        alert(`Oh no! You are not a registered user. Please register first.`)
-      }
+      alert(`Oh no! You are not a registered user. Please register first.`)
     }
   }
 
