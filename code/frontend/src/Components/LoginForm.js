@@ -68,8 +68,18 @@ const LoginForm = () => {
 
     <div className="login">
       <form action="" method="">
-        <input type="text" name="username" placeholder="Username" required />
-        <input type="text" name="password" placeholder="Password" required />
+        <input
+          type="text"
+          name="username"
+          placeholder="Username eg.@user"
+          required
+        />
+        <input
+          type="text"
+          name="address"
+          placeholder="Eth Address eg.0x099999999999999999999"
+          required
+        />
         <input type="submit" value="Login" onClick={(e) => handleSubmit(e)} />
         <input type="submit" value="Register" />
       </form>
