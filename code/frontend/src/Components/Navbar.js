@@ -1,6 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+const loginStyle = {
+  padding: "5px",
+  background: "#1976D2",
+  borderRadius: "10px",
+  textDecoration: "none",
+  color: "white",
+  width: "50px",
+  textAlign: "center",
+};
+
 export default function Navbar() {
   return (
     <div
@@ -13,8 +23,12 @@ export default function Navbar() {
         padding: ".5em",
       }}
     >
-      <Link to="/">Login </Link>
-      <Link to="/home">Wall</Link>
+      <Link to="/" style={loginStyle}>
+        Login
+      </Link>
+      <Link to="/home" style={loginStyle}>
+        Wall
+      </Link>
     </div>
   );
 }
