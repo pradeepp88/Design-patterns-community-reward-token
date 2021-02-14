@@ -1,6 +1,9 @@
 import React from "react";
+import { Route, Switch } from "react-router-dom";
 import TweetContainer from "./Components/TweetContainer";
-import Login from "./Components/Login";
+import LoginForm from "./Components/LoginForm";
+import Error from "./Components/Error";
+import Navbar from "./Components/Navbar";
 
 function App() {
   const divstyle = {
@@ -11,9 +14,18 @@ function App() {
   };
 
   return (
-    <div style={divstyle}>
-      <Login />
-      <TweetContainer status="Add a question" />
+    <div>
+      <Navbar />
+      <div style={divstyle}>
+        <Switch>
+          <Route path="/" component={LoginForm} exact />
+          <Route
+            path="/home"
+            render={(props) => <TweetContainer status="Add a question" />}
+          />
+          <Route component={Error} />
+        </Switch>
+      </div>
     </div>
   );
 }

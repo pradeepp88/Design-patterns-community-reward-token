@@ -5,7 +5,7 @@
     border: 1px solid lightblue;
     border-radius: .8rem;
     max-width: 80vw;
-    text-wrap: 0;
+    /* text-wrap: 0; */
     padding: 1rem;
     height: auto;
     width: 30vw;
