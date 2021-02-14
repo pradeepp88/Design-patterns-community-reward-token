@@ -28,7 +28,8 @@ class DBO {
         const newUser = new ModelUsers({
             UserName:newuser.username,
             PublicAddress:newuser.address,
-            TokenBalance:50
+            TokenBalance:50,
+			isLoggedIn: newuser.isLoggedIn
         })
         newUser.save(function(err){
             if(err) console.log(`Error occurred in adding user to DB():${err}`)
