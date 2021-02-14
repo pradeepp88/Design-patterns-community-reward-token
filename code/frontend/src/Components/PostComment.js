@@ -1,4 +1,6 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
+
 import Comment from "./Comment";
 import { TextField, Button } from "@material-ui/core";
 import SendRoundedIcon from "@material-ui/icons/SendRounded";
@@ -23,6 +25,8 @@ class PostComment extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    console.log("Logged in user >>>", this.props.location.state.user);
+
     if (this.state.comment === "" || this.state.comment == null) {
       return;
     }
@@ -37,6 +41,9 @@ class PostComment extends React.Component {
       commentsList: newComments,
       id: this.state.id + 1,
     });
+
+    // save question
+    // http://localhost:8000/qa/question?username=1&question=text&cost=123
   }
 
   render() {
@@ -61,6 +68,7 @@ class PostComment extends React.Component {
     return (
       <div style={divStyle}>
         <h1>{this.props.status}</h1>
+        LoggedIn: {this.props.location.state.user.username}
         <form style={formStyle}>
           <TextField
             id="outlined-basic"
@@ -85,11 +93,10 @@ class PostComment extends React.Component {
             Post
           </Button>
         </form>
-
         {this.state.commentsList}
       </div>
     );
   }
 }
 
-export default PostComment;
+export default withRouter(PostComment);
