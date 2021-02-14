@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+
 import { Link } from "react-router-dom";
 
 const loginStyle = {
@@ -11,12 +12,24 @@ const loginStyle = {
   textAlign: "center",
 };
 
+// logout = () => {
+//   this.setState({
+//   IsloggedIn: false '',
+//   });
+//   localStorage.clear();
+//   }
+
 export default function Navbar() {
+  const handleLogOut = () => {
+    console.log("logging out");
+    // localStorage.clear();
+  };
+
   return (
     <div
       style={{
         display: "grid",
-        gridTemplateColumns: "auto auto",
+        gridTemplateColumns: "auto auto auto",
         placeItems: "center",
         justifyContent: "center",
         gridGap: "15px",
@@ -28,6 +41,9 @@ export default function Navbar() {
       </Link>
       <Link to="/home" style={loginStyle}>
         Wall
+      </Link>
+      <Link to="/" style={loginStyle} onClick={handleLogOut}>
+        Logout
       </Link>
     </div>
   );

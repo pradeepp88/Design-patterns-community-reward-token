@@ -5,7 +5,7 @@ import LoginForm from "./Components/LoginForm";
 import Error from "./Components/Error";
 import Navbar from "./Components/Navbar";
 
-function App() {
+const App = () => {
   const divstyle = {
     display: "flex",
     flexDirection: "column",
@@ -23,7 +23,8 @@ function App() {
       <Navbar />
       <div style={divstyle}>
         <Switch>
-          <Route path="/" component={LoginForm} exact />
+          <Route path="/" render={() => <LoginForm />} exact />
+
           <Route
             path="/home"
             render={(props) => <PostComment status="Add a question" />}
@@ -33,6 +34,6 @@ function App() {
       </div>
     </div>
   );
-}
+};
 
 export default App;

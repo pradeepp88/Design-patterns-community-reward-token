@@ -2,8 +2,8 @@ import React from "react";
 // import LikeButton from "./LikeButton";
 // import DislikeButton from "./DislikeButton";
 import "./Card.css";
-import Timer from "./Timer";
-import Answer from "./Answer";
+import Timer from "../Timer";
+import Answer from "../Answer";
 
 const Card = (props) => {
   return (

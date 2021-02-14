@@ -2,7 +2,7 @@ import React from "react";
 import LikeButton from "./LikeButton";
 import Timer from "./Timer";
 import DislikeButton from "./DislikeButton";
-import "./Card.css";
+import "./Card/Card.css";
 
 const AnswerCard = (props) => {
   return (

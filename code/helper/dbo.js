@@ -1,15 +1,15 @@
-const mongoose = require('mongoose')
-const ModelUsers = require('./ModelUser')
-const ModelQA = require('./ModelQA')
+const mongoose = require("mongoose");
+const ModelUsers = require("./ModelUser");
+const ModelQA = require("./ModelQA");
 
 //Connection String to MongoDB in the cloud
 const connectionstring =
-  'mongodb://mike:denton@' +
-  'cluster0-shard-00-00.ebbh2.mongodb.net:27017,' +
-  'cluster0-shard-00-01.ebbh2.mongodb.net:27017,' +
-  'cluster0-shard-00-02.ebbh2.mongodb.net:27017/' +
-  'CommunityToken' +
-  '?ssl=true&replicaSet=atlas-p7z0yx-shard-0&authSource=admin&retryWrites=true&w=majority'
+  "mongodb://mike:denton@" +
+  "cluster0-shard-00-00.ebbh2.mongodb.net:27017," +
+  "cluster0-shard-00-01.ebbh2.mongodb.net:27017," +
+  "cluster0-shard-00-02.ebbh2.mongodb.net:27017/" +
+  "CommunityToken" +
+  "?ssl=true&replicaSet=atlas-p7z0yx-shard-0&authSource=admin&retryWrites=true&w=majority";
 
 class DBO {
   constructor() {
@@ -21,117 +21,117 @@ class DBO {
       })
       .then(
         () => {
-          console.log('Mongoose connected successfully')
+          console.log("Mongoose connected successfully");
         },
         (error) => {
-          console.log('Mongoose could not connect to database:' + error)
-        },
-      )
+          console.log("Mongoose could not connect to database:" + error);
+        }
+      );
   }
 
   createNewUser = async (newuser) => {
     try {
-      console.log('start create new user')
-      console.log(newuser)
+      console.log("start create new user");
+      console.log(newuser);
 
       const newUser = new ModelUsers({
         UserName: newuser.username,
         PublicAddress: newuser.address,
         TokenBalance: 50,
-        isLoggedIn: true,
-      })
+        isLoggedIn: false,
+      });
 
-      const user = await newUser.save()
+      const user = await newUser.save();
       if (user) {
-        console.log(`Successfully added user to DB`)
+        console.log(`Successfully added user to DB`);
       }
-      return user
+      return user;
     } catch (err) {
-      console.log(`Error occurred in adding user to DB():${err}`)
+      console.log(`Error occurred in adding user to DB():${err}`);
     }
-  }
+  };
   //added
   loginUser = async (username) => {
     const User = await ModelUsers.findOneAndUpdate(
       { UserName: username },
       { isLoggedIn: true },
-      { new: true },
-    )
-    console.log(User)
-    return User
-  }
+      { new: true }
+    );
+    console.log(User);
+    return User;
+  };
 
   findAllUsers = async () => {
-    const AllUsers = await ModelUsers.find({})
+    const AllUsers = await ModelUsers.find({});
     //console.log(all);
-    return AllUsers
-  }
+    return AllUsers;
+  };
 
   findUser = async (username) => {
-    const User = await ModelUsers.findOne({ UserName: username })
-    console.log(User)
-    return User
-  }
+    const User = await ModelUsers.findOne({ UserName: username });
+    console.log(User);
+    return User;
+  };
 
   createQuestion = (question) => {
-    console.log('start create question')
+    console.log("start create question");
     const newQuestion = new ModelQA.question({
       UserName: question.username,
       QuestionText: question.question,
       QuestionCost: question.cost,
-    })
+    });
 
-    newQuestion.save(function (err) {
-      if (err) console.log(`Error occurred in adding question to DB():${err}`)
+    newQuestion.save(function(err) {
+      if (err) console.log(`Error occurred in adding question to DB():${err}`);
       else {
-        console.log(`Successfully added question to DB`)
+        console.log(`Successfully added question to DB`);
       }
-    })
-  }
+    });
+  };
 
   findAllQuestions = async () => {
-    const AllQuestions = await ModelQA.question.find({})
+    const AllQuestions = await ModelQA.question.find({});
     //console.log(all);
-    return AllQuestions
-  }
+    return AllQuestions;
+  };
 
   findQuestionByID = async (qid) => {
-    const Question = await ModelQA.question.findById(qid)
-    return Question
-  }
+    const Question = await ModelQA.question.findById(qid);
+    return Question;
+  };
 
   saveAnswerToQuestion = (answer) => {
     ModelQA.question.findById(answer.qid, (err, result) => {
       var newAnswer = new ModelQA.answer({
         UserName: answer.username,
         AnswerText: answer.answer,
-      })
-      result.Answers.push(newAnswer)
-      result.save(function (err) {
-        if (err) console.log(`Error occurred in adding answer to DB():${err}`)
+      });
+      result.Answers.push(newAnswer);
+      result.save(function(err) {
+        if (err) console.log(`Error occurred in adding answer to DB():${err}`);
         else {
-          console.log(`Successfully added answer to DB`)
+          console.log(`Successfully added answer to DB`);
         }
-      })
-    })
-  }
+      });
+    });
+  };
 
   declareAnswerWinner = (winner) => {
-    console.log('DeclareWinner')
+    console.log("DeclareWinner");
     ModelQA.question.findOneAndUpdate(
-      { _id: winner.qid, 'Answers._id': winner.aid },
-      { 'Answers.$.IsWinner': true },
-      function (err, doc) {
+      { _id: winner.qid, "Answers._id": winner.aid },
+      { "Answers.$.IsWinner": true },
+      function(err, doc) {
         if (err)
           console.log(
-            `Error occurred in declaring winner answer to DB():${err}`,
-          )
+            `Error occurred in declaring winner answer to DB():${err}`
+          );
         else {
-          console.log(`Successfully added declaring winner answer to DB`)
+          console.log(`Successfully added declaring winner answer to DB`);
         }
-      },
-    )
-  }
+      }
+    );
+  };
 }
 
-module.exports = DBO
+module.exports = DBO;
