@@ -12,21 +12,13 @@ class AnswerCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isWinner: props.isWinner || false
+      isWinner: props.isWinner,
+      isDisable: props.isDisable
     }
   }
 
   handleSelect = async () => {
-    const commentId = this.props.commentId || '602821c7fd54bb8078c1f26f';
-    const answerId = this.props.answerId || '6028269515dbee8a0cc1043a';
-    await fetch(`http://localhost:8000/qa/winner?qid=${commentId}&aid=${answerId}`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      }
-    });
-    this.setState({ isWinner: true });
+   this.props.handleAnswerSelect(this.props.answerId);
   }
 
   render() {
@@ -46,6 +38,7 @@ class AnswerCard extends React.Component {
             color="primary"
             startIcon={<CheckCircleIcon />}
             onClick={this.handleSelect}
+            disabled={this.state.isDisable}
           >
             Select
         </Button>

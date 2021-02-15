@@ -25,28 +25,28 @@ router.get("/:qid", async function (req, res, next) {
 
 //Saving Question
 //POST-http://localhost:8000/qa/question?username=1&question=text&cost=123
-router.post("/question", function (req, res, next) {
+router.post("/question", async function (req, res, next) {
   console.log("Saving Question:");
   console.log(req.query);
-  dbo.createQuestion(req.query);
+  await dbo.createQuestion(req.query);
   res.send(true);
 });
 
 //Saving Answer
 //POST-http://localhost:8000/qa/answer?qid=602821c7fd54bb8078c1f26f&username=band&answer=answer
-router.post("/answer", function (req, res, next) {
+router.post("/answer", async function (req, res, next) {
   console.log("Saving Answer:");
   console.log(req.query);
-  dbo.saveAnswerToQuestion(req.query);
+  await dbo.saveAnswerToQuestion(req.query);
   res.send(true);
 });
 
 //Winning Answer
 //POST-http://localhost:8000/qa/winner?qid=602821c7fd54bb8078c1f26f&aid=6028269515dbee8a0cc1043a
-router.post("/winner", function (req, res, next) {
+router.post("/winner", async function (req, res, next) {
   console.log("Winning Answer:");
   console.log(req.query);
-  dbo.declareAnswerWinner(req.query);
+  await dbo.declareAnswerWinner(req.query);
   res.send(true);
 });
 

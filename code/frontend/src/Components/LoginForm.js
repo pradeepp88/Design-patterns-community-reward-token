@@ -66,7 +66,7 @@ const LoginForm = (props) => {
     setAddress("");
 
     if (user.isLoggedIn) {
-      alert(`You are logged in ${user.username}.`);
+      //alert(`You are logged in ${user.username}.`);
       // redirect to home
       props.history.push("/home", { user: user });
       // props.history.push("/home");

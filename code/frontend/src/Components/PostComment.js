@@ -14,8 +14,6 @@ class PostComment extends React.Component {
       commentsList: [],
       id: 1,
     };
-
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -27,7 +25,7 @@ class PostComment extends React.Component {
     const response = await fetch(`http://localhost:8000/qa`);
     const questions = await response.json();
     const commentsList = []
-    questions.map(comment =>
+    questions.forEach(comment =>
       commentsList.push({
         commentId: comment._id,
         comment: comment.QuestionText,

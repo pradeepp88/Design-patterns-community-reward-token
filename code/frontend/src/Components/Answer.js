@@ -27,16 +27,27 @@ class Answer extends React.Component {
   populateAnswers = async () => {
     const response = await fetch(`http://localhost:8000/qa/${this.props.commentId}`);
     const comment = await response.json();
-    
+
+    this.setState({
+      commentsList: []
+    });
+
     const commentsList = [];
-    comment.Answers.map(a =>
+    let isWinnerFound = false;
+    comment.Answers.forEach(a => {
+      if (a.IsWinner) isWinnerFound = true;
       commentsList.push({
         answerId: a._id,
         answer: a.AnswerText,
         user: a.UserName,
-        isWinner: a.isWinner
-      })
-    );
+        isWinner: a.IsWinner
+      });
+    });
+
+    if (isWinnerFound) {
+      commentsList.forEach(c => c.isDisable = true);
+    }
+
     this.setState({
       commentsList: commentsList
     });
@@ -70,6 +81,18 @@ class Answer extends React.Component {
       this.handleSubmit(event);
     }
   };
+
+  handleAnswerSelect = async (answerId) => {
+    const commentId = this.props.commentId;
+    await fetch(`http://localhost:8000/qa/winner?qid=${commentId}&aid=${answerId}`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      }
+    });
+    this.populateAnswers();
+  }
 
   render() {
     const divStyle = {
@@ -117,7 +140,14 @@ class Answer extends React.Component {
 
         {this.state.commentsList.map((c, index) => (
           <div key={index}>
-            <AnswerCard answer={c.answer} answerId={c.answerId} isWinner={c.isWinner} user={c.user} commentId={this.props.commentId}/>
+            <AnswerCard answer={c.answer}
+              answerId={c.answerId}
+              isWinner={c.isWinner}
+              user={c.user}
+              commentId={this.props.commentId}
+              handleAnswerSelect={this.handleAnswerSelect}
+              isDisable={c.isDisable}
+            />
           </div>
         ))}
       </div>

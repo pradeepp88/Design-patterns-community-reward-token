@@ -73,7 +73,7 @@ class DBO {
     return User;
   };
 
-  createQuestion = (question) => {
+  createQuestion = async (question) => {
     console.log("start create question");
     const newQuestion = new ModelQA.question({
       UserName: question.username,
@@ -81,12 +81,7 @@ class DBO {
       QuestionCost: question.cost,
     });
 
-    newQuestion.save(function(err) {
-      if (err) console.log(`Error occurred in adding question to DB():${err}`);
-      else {
-        console.log(`Successfully added question to DB`);
-      }
-    });
+    await newQuestion.save();
   };
 
   findAllQuestions = async () => {
@@ -100,36 +95,21 @@ class DBO {
     return Question;
   };
 
-  saveAnswerToQuestion = (answer) => {
-    ModelQA.question.findById(answer.qid, (err, result) => {
-      var newAnswer = new ModelQA.answer({
-        UserName: answer.username,
-        AnswerText: answer.answer,
-      });
-      result.Answers.push(newAnswer);
-      result.save(function(err) {
-        if (err) console.log(`Error occurred in adding answer to DB():${err}`);
-        else {
-          console.log(`Successfully added answer to DB`);
-        }
-      });
+  saveAnswerToQuestion = async (answer) => {
+    const result = await ModelQA.question.findById(answer.qid);
+    var newAnswer = new ModelQA.answer({
+      UserName: answer.username,
+      AnswerText: answer.answer,
     });
+    result.Answers.push(newAnswer);
+    await result.save();
   };
 
-  declareAnswerWinner = (winner) => {
+  declareAnswerWinner = async (winner) => {
     console.log("DeclareWinner");
-    ModelQA.question.findOneAndUpdate(
+    await ModelQA.question.findOneAndUpdate(
       { _id: winner.qid, "Answers._id": winner.aid },
-      { "Answers.$.IsWinner": true },
-      function(err, doc) {
-        if (err)
-          console.log(
-            `Error occurred in declaring winner answer to DB():${err}`
-          );
-        else {
-          console.log(`Successfully added declaring winner answer to DB`);
-        }
-      }
+      { "Answers.$.IsWinner": true }
     );
   };
 }
