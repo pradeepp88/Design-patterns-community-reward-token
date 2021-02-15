@@ -31,7 +31,7 @@ class PostComment extends React.Component {
       return;
     }
     var newComment = (
-      <Comment key={this.state.id} comment={this.state.comment} />
+      <Comment key={this.state.id} comment={this.state.comment} user={this.props.location.state.user}/>
     );
     var newComments = this.state.commentsList.slice();
 

@@ -12,7 +12,7 @@ const Comment = (props) => {
 
   return (
     <div style={divStyle}>
-      <Card comment={props.comment} />
+      <Card comment={props.comment} user={props.user}/>
     </div>
   );
 };

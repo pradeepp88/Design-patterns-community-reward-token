@@ -15,5 +15,21 @@
     background: #d9e8ff;
   }
 
+  .cardWinner {
+    margin: .5rem;
+    align-items: auto;
+
+    border: 1px solid lightblue;
+    border-radius: .8rem;
+    max-width: 80vw;
+    /* text-wrap: 0; */
+    padding: 1rem;
+    height: auto;
+    width: 30vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background: #9cc59e;
+  } 
 
  .answer{align-items: "left" }
