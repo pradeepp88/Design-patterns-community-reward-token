@@ -12,14 +12,14 @@ class AnswerCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isWinner: props.data.isWinner || false
+      isWinner: props.isWinner || false
     }
   }
 
   handleSelect = async () => {
-    const questionId = this.props.data.questionId || '602821c7fd54bb8078c1f26f';
-    const answerId = this.props.data.answerId || '6028269515dbee8a0cc1043a';
-    await fetch(`http://localhost:8000/qa/winner?qid=${questionId}&aid=${answerId}`, {
+    const commentId = this.props.commentId || '602821c7fd54bb8078c1f26f';
+    const answerId = this.props.answerId || '6028269515dbee8a0cc1043a';
+    await fetch(`http://localhost:8000/qa/winner?qid=${commentId}&aid=${answerId}`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -35,11 +35,11 @@ class AnswerCard extends React.Component {
         <Timer />
         <Chip
           icon={<FaceIcon />}
-          label={this.props.user.username}
+          label={this.props.user}
         />
         <div className={this.state.isWinner ? 'cardWinner' : 'card'}>
-          {this.props.data}
-          <LikeButton data={this.props.data} />
+          {this.props.answer}
+          <LikeButton data={this.props.answer} />
           <DislikeButton />
           <Button
             variant="contained"

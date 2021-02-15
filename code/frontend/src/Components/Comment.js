@@ -12,7 +12,7 @@ const Comment = (props) => {
 
   return (
     <div style={divStyle}>
-      <Card comment={props.comment} user={props.user}/>
+      <Card comment={props.comment} commentId={props.commentId} user={props.user} loggedInUser={props.loggedInUser}/>
     </div>
   );
 };

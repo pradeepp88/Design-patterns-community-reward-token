@@ -23,27 +23,42 @@ class PostComment extends React.Component {
     this.setState({ comment: event.target.value });
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    console.log("Logged in user >>>", this.props.location.state.user);
+  populateQuestions = async () => {
+    const response = await fetch(`http://localhost:8000/qa`);
+    const questions = await response.json();
+    const commentsList = []
+    questions.map(comment =>
+      commentsList.push({
+        commentId: comment._id,
+        comment: comment.QuestionText,
+        user: comment.UserName
+      })
+    );
+    this.setState({
+      commentsList: commentsList
+    });
+  }
 
+  componentDidMount = async () => {
+    console.log("Logged in user >>>", this.props.location.state.user);
+    await this.populateQuestions();
+  }
+
+  handleSubmit = async (event) => {
+    event.preventDefault();
     if (this.state.comment === "" || this.state.comment == null) {
       return;
     }
-    var newComment = (
-      <Comment key={this.state.id} comment={this.state.comment} user={this.props.location.state.user}/>
-    );
-    var newComments = this.state.commentsList.slice();
-
-    newComments.push(newComment);
-    this.setState({
-      comment: "",
-      commentsList: newComments,
-      id: this.state.id + 1,
+    const username = this.props.location.state.user.username;
+    await fetch(`http://localhost:8000/qa/question?username=${username}&question=${this.state.comment}&cost=123`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      }
     });
-
-    // save question
-    // http://localhost:8000/qa/question?username=1&question=text&cost=123
+    this.state.comment = "";
+    await this.populateQuestions();
   }
 
   render() {
@@ -88,12 +103,16 @@ class PostComment extends React.Component {
             color="secondary"
             size="medium"
             startIcon={<SendRoundedIcon />}
-            onClick={(e) => this.handleSubmit(e)}
+            onClick={this.handleSubmit}
           >
             Post
           </Button>
         </form>
-        {this.state.commentsList}
+        {this.state.commentsList.map((c, index) => (
+          <div key={index}>
+            <Comment key={index} comment={c.comment} commentId={c.commentId} user={c.user} loggedInUser={this.props.location.state.user} />
+          </div>
+        ))}
       </div>
     );
   }
