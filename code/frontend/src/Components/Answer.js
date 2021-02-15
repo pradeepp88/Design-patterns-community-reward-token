@@ -93,7 +93,7 @@ class Answer extends React.Component {
 
         {this.state.commentsList.map((comment, index) => (
           <div key={index}>
-            <AnswerCard data={comment} />
+            <AnswerCard data={comment} user={this.props.user}/>
           </div>
         ))}
       </div>

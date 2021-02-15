@@ -15,7 +15,7 @@ const Card = (props) => {
         <DislikeButton /> */}
       </div>
       <div className="answer">
-        <Answer />
+        <Answer user={props.user}/>
       </div>
     </div>
   );
