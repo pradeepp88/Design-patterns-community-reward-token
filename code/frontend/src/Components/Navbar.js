@@ -13,24 +13,10 @@ const loginStyle = {
   textAlign: "center",
 };
 
-// logout = () => {
-//   this.setState({
-//   IsloggedIn: false '',
-//   });
-//   localStorage.clear();
-//   }
-
 function Navbar(props) {
   const handleLogOut = () => {
     console.log("logging out");
     // localStorage.clear();
-    let usernameLoggedIn = props.location.state.user.username;
-    const response = await fetch(
-      `http://localhost:8000/users?username=${usernameLoggedIn}&address=${address}`
-    );
-    const user = await response.json();
-    user.isLoggedIn = false;
-
     //Logout User
     props.history.push('/', {"​​​user" : {}});
 
