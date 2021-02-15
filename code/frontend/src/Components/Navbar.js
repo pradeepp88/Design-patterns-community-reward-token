@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 
 import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 const loginStyle = {
   padding: "5px",
@@ -19,10 +20,21 @@ const loginStyle = {
 //   localStorage.clear();
 //   }
 
-export default function Navbar() {
+function Navbar(props) {
   const handleLogOut = () => {
     console.log("logging out");
     // localStorage.clear();
+    let usernameLoggedIn = props.location.state.user.username;
+    const response = await fetch(
+      `http://localhost:8000/users?username=${usernameLoggedIn}&address=${address}`
+    );
+    const user = await response.json();
+    user.isLoggedIn = false;
+
+    //Logout User
+    props.history.push('/', {"​​​user" : {}});
+
+
   };
 
   return (
@@ -48,3 +60,5 @@ export default function Navbar() {
     </div>
   );
 }
+
+export default withRouter(Navbar);

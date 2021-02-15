@@ -46,4 +46,36 @@ router.post('/', async function (req, res, next) {
   res.json({ username: registeredUser.UserName })
 })
 
+//Get User
+//http://localhost:8000/users?username=1
+router.get('/', async function (req, res, next) {
+  console.log('Login:')
+  console.log(req.query)
+
+  let User = await dbo.findUser(req.query.username)
+  console.log('User Query Complete')
+  if (User.isLoggedIn) {
+    res.json({
+      isLoggedIn: User.isLoggedIn,
+      username: User.UserName,
+      address: User.PublicAddress,
+    })
+  } else {
+    User = await dbo.loginUser(req.query.username)
+    if (
+      User != null &&
+      User.PublicAddress == req.query.address &&
+      User.isLoggedIn
+    ) {
+      res.json({
+        exist: true,
+        username: User.UserName,
+        address: User.PublicAddress,
+      })
+    } else {
+      res.json({ exist: false })
+    }
+  }
+})
+
 module.exports = router

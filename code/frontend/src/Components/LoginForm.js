@@ -73,6 +73,7 @@ const LoginForm = (props) => {
     } else {
       if (user.exist) {
         // set loggedIn user (from Context ) here
+        user.isLoggedIn = true;
         // setLoggedInUser(user);
         alert(
           `You are now logged in ${user.username}. Start asking/answering questions!`
