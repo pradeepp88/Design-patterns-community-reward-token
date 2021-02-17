@@ -29,9 +29,8 @@ A platform that rewards the developers with tokens which can incentivize their e
 | 10 | Integration   and Testing               | Team                       | Integration   of UI with backend services and testing                                        |       9      |   10-Feb   |  16-Feb  |        6        |
 | 11 | Deployment                              | Team                       | Deployment   for rewards token                                                               |      10      |   11-Feb   |  12-Feb  |        1        |
 
-### Gantt Chart
-
-[Gantt Chart](./artifacts/GanttChart.png)
+#
+![Gantt Chart](https://github.com/nidushahw/Design-patterns-community-reward-token/blob/main/artifacts/GanttChart.png?raw=true)
 
 
 ## Problem
