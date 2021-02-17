@@ -30,8 +30,7 @@ A platform that rewards the developers with tokens which can incentivize their e
 | 11 | Deployment                              | Team                       | Deployment   for rewards token                                                               |      10      |   11-Feb   |  12-Feb  |        1        |
 
 #
-![Gantt Chart](https://github.com/nidushahw/Design-patterns-community-reward-token/blob/main/artifacts/GanttChart.png?raw=true)
-
+![GanttChart](https://github.com/nidushahw/Design-patterns-community-reward-token/blob/main/artifacts/GanttChart.PNG)
 
 ## Problem
 Currently, there are no decentralized platforms which is available for organizations where they can post rewards the developers for their contribution either technical or non-technical to the development. 
