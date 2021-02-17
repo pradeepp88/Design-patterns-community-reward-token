@@ -4,6 +4,7 @@ import PostComment from "./Components/PostComment";
 import LoginForm from "./Components/LoginForm";
 import Error from "./Components/Error";
 import Navbar from "./Components/Navbar";
+import Points from "./Components/Points";
 
 const App = () => {
   const divstyle = {
@@ -24,10 +25,13 @@ const App = () => {
       <div style={divstyle}>
         <Switch>
           <Route path="/" render={() => <LoginForm />} exact />
-
           <Route
             path="/home"
             render={(props) => <PostComment status="Add a question" />}
+          />
+          <Route
+            path="/points"
+            render={() => <Points />}
           />
           <Route component={Error} />
         </Switch>

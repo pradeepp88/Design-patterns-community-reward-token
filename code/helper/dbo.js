@@ -61,6 +61,35 @@ class DBO {
     return User;
   };
 
+  //Get User Balance
+  getUserBalance = async (username) => {
+    const User = await ModelUsers.findOne(
+      { UserName: username }
+    );
+    console.log(User);
+    return User;
+  };
+
+  //update user balance
+  updateUserBalance = async (username, balance) => {
+    const User = await ModelUsers.findOneAndUpdate(
+      { UserName: username },
+      { TokenBalance: balance}
+    )
+    console.log(User);
+    return User;
+  }
+
+  //update user status
+  updateUserStatus = async (username, isLoggedIn) => {
+    const User = await ModelUsers.findOneAndUpdate(
+      { UserName: username },
+      { isLoggedIn: isLoggedIn}
+    )
+    console.log(User);
+    return User;
+  }
+
   findAllUsers = async () => {
     const AllUsers = await ModelUsers.find({});
     //console.log(all);
@@ -93,6 +122,13 @@ class DBO {
   findQuestionByID = async (qid) => {
     const Question = await ModelQA.question.findById(qid);
     return Question;
+  };
+
+  findAnswerByID = async (answer) => {
+    console.log("Query",answer);
+    const Answer = await ModelQA.question.findOne({ "Answers._id": answer.aid });
+    console.log(Answer);
+    return Answer;
   };
 
   saveAnswerToQuestion = async (answer) => {

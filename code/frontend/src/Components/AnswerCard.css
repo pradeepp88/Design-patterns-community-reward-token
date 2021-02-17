@@ -1,0 +1,18 @@
+.answercard {
+    margin: .5rem;
+    align-items: center;
+
+    border: 1px solid #fff9d9;
+    border-radius: .8rem;
+    max-width: 80vw;
+    /* text-wrap: 0; */
+    padding: 1rem;
+    height: auto;
+    width: 30vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background: #fff9d9;
+  } 
+
+ .answer{align-items: "left" }

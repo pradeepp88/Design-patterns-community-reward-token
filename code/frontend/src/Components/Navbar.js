@@ -14,20 +14,33 @@ const loginStyle = {
 };
 
 function Navbar(props) {
-  const handleLogOut = () => {
+
+  const handleLogOut = async () => {
     console.log("logging out");
-    // localStorage.clear();
+    localStorage.clear();
     //Logout User
     props.history.push('/', {"​​​user" : {}});
-
-
+    const username = localStorage.getItem('username');
+    await fetch('http://localhost:8000/users/logout', {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: username,
+        isLoggedIn: false
+      })
+    })
+    localStorage.clear();
   };
+
 
   return (
     <div
       style={{
         display: "grid",
-        gridTemplateColumns: "auto auto auto",
+        gridTemplateColumns: "auto auto auto auto",
         placeItems: "center",
         justifyContent: "center",
         gridGap: "15px",
@@ -35,10 +48,7 @@ function Navbar(props) {
       }}
     >
       <Link to="/" style={loginStyle}>
-        Login
-      </Link>
-      <Link to="/home" style={loginStyle}>
-        Wall
+        Home
       </Link>
       <Link to="/" style={loginStyle} onClick={handleLogOut}>
         Logout

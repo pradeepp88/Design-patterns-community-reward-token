@@ -3,6 +3,8 @@ import React from "react";
 import { TextField, Button } from "@material-ui/core";
 import SendRoundedIcon from "@material-ui/icons/SendRounded";
 import AnswerCard from "./AnswerCard";
+import SCO from '../sco';
+let sco = new SCO();
 
 class Answer extends React.Component {
   constructor(props) {
@@ -54,7 +56,7 @@ class Answer extends React.Component {
   }
 
   componentDidMount = async () => {
-    await this.populateAnswers();
+    await this.populateAnswers().then(window.scrollTo(0, 0));
   }
 
   handleSubmit = async (event) => {
@@ -83,15 +85,83 @@ class Answer extends React.Component {
   };
 
   handleAnswerSelect = async (answerId) => {
-    const commentId = this.props.commentId;
-    await fetch(`http://localhost:8000/qa/winner?qid=${commentId}&aid=${answerId}`, {
-      method: "POST",
+    const question = await fetch(`http://localhost:8000/qa/search/${this.props.commentId}`, {
+      method: "GET",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       }
     });
-    this.populateAnswers();
+    const owner = await question.json();
+    const username = this.props.loggedInUser.username;
+    console.log(`Getting Owner of Question ${this.props.commentId}`, owner.Username);
+    console.log("logged in user", username);
+    const qCost = owner.QuestionCost;
+    if (owner.Username === username){    
+      const commentId = this.props.commentId;
+      fetch(`http://localhost:8000/qa/winner?qid=${commentId}&aid=${answerId}`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        }
+      }).then(async ()=>{
+        console.log("AnswerId:",answerId);
+        const answerOwner = await fetch(`http://localhost:8000/qa/srcanswer?aid=${answerId}`, {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          }
+        })
+        const answerOwnerJson = await answerOwner.json();
+        console.log("Answer Owner:",answerOwnerJson.Answers);
+        const answerOwner1 = answerOwnerJson.Answers;
+        return answerOwner1;
+      }).then(async (answerOwner1)=>{
+        const balance = await fetch(`http://localhost:8000/users/getbalance?username=${answerOwner1}`,{
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          }
+        })
+        const balanceJson = await balance.json();
+        const oldBalance = balanceJson.balance;
+        console.log("Old Balance is",oldBalance);
+        return {
+          username: answerOwner1,
+          balance: oldBalance
+        }
+      }).then(async (answerOwner1)=>{
+        console.log("Transfer check - Answer Owner:", answerOwner1.address);
+        console.log("Transfer check - Old Balance is",answerOwner1.balance);
+        console.log("Question Cost: ", qCost);
+        const newBalance = answerOwner1.balance+qCost;
+        await fetch('http://localhost:8000/users/balance', {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: answerOwner1.username,
+          balance: newBalance
+        })
+        })
+        console.log(`Balance for ${answerOwner1.address} updated to ${newBalance}`);
+        const key = prompt('Please enter your private key (this will not be saved and used only for one transaction)');
+        //sco.declareWinner(owner.address,answerOwner1.address,qCost,key);
+        
+        alert("Transaction Success! Answer owner rewarded");
+        this.populateAnswers();
+      })
+    
+    }
+    else{
+      alert("Only question owner can select the winner");
+      return;
+    }
   }
 
   render() {

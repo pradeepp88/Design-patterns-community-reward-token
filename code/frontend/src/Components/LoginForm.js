@@ -4,6 +4,11 @@ import { TextField, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import SaveIcon from "@material-ui/icons/Save";
+import logo from './logo.png';
+import './Login.css';
+
+import SCO from '../sco';
+let sco = new SCO();
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -44,10 +49,12 @@ const LoginForm = (props) => {
     });
     const user = await response.json();
     alert(
-      `You are now registered ${user.username}. Start asking/answering questions!`
+      `You are now registered as ${user.username}. Please login to continue`
     );
-    // if we want to auto login user after registering - uncomment code below
-    //loginUser()
+    
+    //Smart Contract Operations
+    const key = prompt('Please enter your private key (this will not be saved and used only for one transaction)');
+    await sco.registerNewUser(address,key);
 
     // clear username and address fields
     setUsername("");
@@ -56,7 +63,11 @@ const LoginForm = (props) => {
 
   //Login User
   const loginUser = async () => {
-    console.log("login");
+    if(username === "" || address === "" ){
+      alert("Please fill both username and address");
+      return;
+    }
+    console.log("Loggin in..");
     const response = await fetch(
       `http://localhost:8000/users?username=${username}&address=${address}`
     );
@@ -65,28 +76,24 @@ const LoginForm = (props) => {
     setUsername("");
     setAddress("");
 
-    if (user.isLoggedIn) {
-      //alert(`You are logged in ${user.username}.`);
-      // redirect to home
+    if (user.exist) {
+      // set loggedIn user (from Context ) here
+      user.isLoggedIn = true;
       props.history.push("/home", { user: user });
-      // props.history.push("/home");
+      localStorage.setItem('username', username);
+      // setLoggedInUser(user);
     } else {
-      if (user.exist) {
-        // set loggedIn user (from Context ) here
-        user.isLoggedIn = true;
-        // setLoggedInUser(user);
-        alert(
-          `You are now logged in ${user.username}. Start asking/answering questions!`
-        );
-      } else {
-        alert(`Oh no! You are not a registered user. Please register first.`);
-      }
+      alert(`You are not a registered user. Please register first.`);
     }
+    
   };
 
+  
+
   return (
+    <div className="divStyle">
     <form style={formStyle}>
-      <img src="" alt="" className={classes} />
+      <img src={logo} alt="Logo" className="image" />
 
       <TextField
         placeholder="Username"
@@ -103,6 +110,7 @@ const LoginForm = (props) => {
         length="5"
         value={address}
         onChange={(e) => setAddress(e.target.value)}
+        onSubmit={loginUser}
       />
 
       <div style={buttonDivStyle}>
@@ -119,7 +127,7 @@ const LoginForm = (props) => {
 
         <Button
           variant="contained"
-          color="primary"
+          color="secondary"
           size="large"
           className={classes.button}
           startIcon={<ExitToAppIcon />}
@@ -127,8 +135,12 @@ const LoginForm = (props) => {
         >
           Login
         </Button>
+        <br/>
+        
+
       </div>
     </form>
+    </div>
   );
 };
 
