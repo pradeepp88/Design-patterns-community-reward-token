@@ -14,7 +14,7 @@ const Answer = mongoose.model('Answer',AnswerSchema,'CommunityQuestionAnswers');
 const QuestionSchema = new mongoose.Schema({
     UserName:String,
     QuestionText:String,
-    QuestionCost:String,
+    QuestionCost:Number,
     Answers:[ AnswerSchema ] 
 });
 

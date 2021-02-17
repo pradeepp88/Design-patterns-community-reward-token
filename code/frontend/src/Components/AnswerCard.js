@@ -3,6 +3,7 @@ import LikeButton from "./LikeButton";
 import Timer from "./Timer";
 import DislikeButton from "./DislikeButton";
 import "./Card/Card.css";
+import "./AnswerCard.css";
 import Chip from '@material-ui/core/Chip';
 import FaceIcon from '@material-ui/icons/Face';
 import Button from '@material-ui/core/Button';
@@ -18,21 +19,19 @@ class AnswerCard extends React.Component {
   }
 
   handleSelect = async () => {
-   this.props.handleAnswerSelect(this.props.answerId);
+    this.props.handleAnswerSelect(this.props.answerId);
   }
 
   render() {
     return (
       <div>
-        <Timer />
         <Chip
           icon={<FaceIcon />}
           label={this.props.user}
         />
-        <div className={this.state.isWinner ? 'cardWinner' : 'card'}>
+        <div className={this.state.isWinner ? 'cardWinner' : 'answercard'}>
           {this.props.answer}
-          <LikeButton data={this.props.answer} />
-          <DislikeButton />
+          <LikeButton data={this.props.answer} /><DislikeButton />
           <Button
             variant="contained"
             color="primary"
@@ -40,7 +39,7 @@ class AnswerCard extends React.Component {
             onClick={this.handleSelect}
             disabled={this.state.isDisable}
           >
-            Select
+            Winner
         </Button>
         </div>
       </div>

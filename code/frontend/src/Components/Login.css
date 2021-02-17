@@ -11,3 +11,18 @@
   
 .login input{display:block;padding:5px;font-family:tahoma;font-size:13px;margin:20px auto;outline:none;border:1px solid #000000;width:200px;}
 .login input[type="submit"]{border-left:10px solid #000000;cursor:pointer;}
+
+.image {
+  display: block;
+margin-left: auto;
+margin-right: auto;
+width: 100%;
+}
+
+
+.divStyle{
+width: 500px;
+padding: 50px;
+margin: 20px;
+
+}
