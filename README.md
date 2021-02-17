@@ -31,7 +31,7 @@ A platform that rewards the developers with tokens which can incentivize their e
 
 ### Gantt Chart
 
-![](./artifacts/GanttChart.png)
+[Gantt Chart](./artifacts/GanttChart.png)
 
 
 ## Problem
