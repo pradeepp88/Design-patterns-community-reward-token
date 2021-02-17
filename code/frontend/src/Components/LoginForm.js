@@ -54,7 +54,7 @@ const LoginForm = (props) => {
     
     //Smart Contract Operations
     const key = prompt('Please enter your private key (this will not be saved and used only for one transaction)');
-    await sco.registerNewUser(address,key);
+    //await sco.registerNewUser(address,key);
 
     // clear username and address fields
     setUsername("");
