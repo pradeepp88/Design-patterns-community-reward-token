@@ -10,8 +10,8 @@ A platform that rewards the developers with tokens which can incentivize their e
 * Pradeep Kumar Prakasam
 * Saiju Mathew Stephen
 
-## Project Plan
-[Project Plan](https://georgebrowncollege.sharepoint.com/sites/BCDV1010-WINTER2021copy-Community/Lists/ProjectPlan/gantt.aspx?IsDlg=1)
+## Project Plan [(link)](https://georgebrowncollege.sharepoint.com/sites/BCDV1010-WINTER2021copy-Community/Lists/ProjectPlan/gantt.aspx?IsDlg=1)
+![](https://github.com/nidushahw/Design-patterns-community-reward-token/blob/main/artifacts/ProjectPlan.JPG?raw=true)
 
 ## Problem
 Currently, there are no decentralized platforms which is available for organizations where they can post rewards the developers for their contribution either technical or non-technical to the development. 
