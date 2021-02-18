@@ -64,18 +64,9 @@ Currently, there are no decentralized platforms which is available for organizat
 ## Architecture
 ![](https://github.com/nidushahw/Design-patterns-community-reward-token/blob/main/artifacts/CommunityRewardsTokenArchitecture.jpeg?raw=true)
 
-### Data
+### Transaction Flow
 
-|    NAME   |     TYPE      |    STRUCTURE     |  VISIBILITY |        PURPOSE       |              
-|-----------|---------------|------------------|-------------|----------------------|
-|-----------|---------------|------------------|-------------|----------------------|
-|-----------|---------------|------------------|-------------|----------------------|
-|-----------|---------------|------------------|-------------|----------------------|
-|-----------|---------------|------------------|-------------|----------------------|
-|-----------|---------------|------------------|-------------|----------------------|
-|-----------|---------------|------------------|-------------|----------------------|
-|-----------|---------------|------------------|-------------|----------------------|
-|-----------|---------------|------------------|-------------|----------------------|
+![](http://https://github.com/nidushahw/Design-patterns-community-reward-token/blob/main/artifacts/CRTTransactionDiagram.jpeg?/200x150)
 
 
 ## Further Development
