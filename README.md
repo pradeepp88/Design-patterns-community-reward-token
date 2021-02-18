@@ -11,7 +11,7 @@ A platform that rewards the developers with tokens which can incentivize their e
 * Saiju Mathew Stephen
 
 ## Project Plan
-[Project Plan - Gantt Chart](https://georgebrowncollege.sharepoint.com/sites/BCDV1010-WINTER2021copy-Community/Lists/ProjectPlan/gantt.aspx?IsDlg=1)
+[Project Plan](https://georgebrowncollege.sharepoint.com/sites/BCDV1010-WINTER2021copy-Community/Lists/ProjectPlan/gantt.aspx?IsDlg=1)
 
 ### Project Tasks and Responsibilites
 
@@ -66,6 +66,10 @@ Currently, there are no decentralized platforms which is available for organizat
 
 ## Transaction Flow
 ![](https://github.com/nidushahw/Design-patterns-community-reward-token/blob/main/artifacts/CRTTransactionFlow.jpg)
+
+## Testing screenshots
+![](https://github.com/nidushahw/Design-patterns-community-reward-token/blob/main/artifacts/TestingScreenshots.jpg)
+
 
 ## Further Development
 * Publishing to main network
