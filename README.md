@@ -68,7 +68,7 @@ Currently, there are no decentralized platforms which is available for organizat
 ![](https://github.com/nidushahw/Design-patterns-community-reward-token/blob/main/artifacts/CRTTransactionFlow.jpg)
 
 ## Testing screenshots
-![](https://github.com/nidushahw/Design-patterns-community-reward-token/blob/main/artifacts/TestingScreenshots.jpg)
+![](https://github.com/elaquiambao/GBC-DesignPatterns-CommunityRewardToken-GroupAssignment/blob/main/artifacts/TestingScreenshots.jpg)
 
 
 ## Further Development
